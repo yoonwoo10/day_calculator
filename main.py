@@ -4,106 +4,6 @@ today = date.today()
 # year 입력
 year = 2024
 
-# month 입력
-while True:
-    try:
-        month = int(input("Month : "))
-        if month > 12: 
-            raise NotImplementedError
-        break
-    except NotImplementedError:
-        print("12월까지만 입력해주세용")
-    except ValueError:
-        print("숫자를 입력해주세용")
-
-# day 입력
-# 몇 월인지 확인
-thir_o_d = [1, 3, 5, 7, 8, 10, 12]   # thirty_one_days
-thir_d = [4, 6, 9, 11]      #thirty_days
-
-# 31일까지 있는 달
-for i in thir_o_d:
-    if month == i:
-        while True:
-            try:
-                day = int(input("Day : "))
-                if day > 31:
-                    raise NotImplementedError
-                break
-            except NotImplementedError:
-                print("31일까지만 입력해주세용")
-            except ValueError:
-                print("숫자를 입력해주세용")
-        break
-
-# 30일까지 있는 달
-for i in thir_d:
-    if month == i:
-        while True:
-            try:
-                day = int(input("Day : "))
-                if day > 30:
-                    raise NotImplementedError
-                break
-            except NotImplementedError:
-                print("30일까지만 입력해주세용")
-            except ValueError:
-                print("숫자를 입력해주세용")
-        break
-
-# 2월
-if month == 2:
-    # 윤년 계산
-    if year%4 == 0:     # 4년마다 한번
-        if year%100 != 0:   #100으로 안 나누어ㄸ러어짐
-            # 그냥 윤년일 때
-            while True:
-                try:
-                    day = int(input("Day : "))
-                    if day > 29:
-                        raise NotImplementedError
-                    break
-                except NotImplementedError:
-                    print("29일까지만 입력해주세용")
-                except ValueError:
-                    print("숫자를 입력해주세용")
-        # 100으로 나누어떨어지지만 400으로 나누어떨어지지 않는 해
-        elif year%100==0:         #100으로 나누어떨어지지만
-            if year%400 !=0:    #400으로는 나누어떨어지지 않는 해
-                while True:
-                    try:
-                        day = int(input("Day : "))
-                        if day > 28:
-                            raise NotImplementedError
-                        break
-                    except NotImplementedError:
-                        print("28일까지만 입력해주세용")
-                    except ValueError:
-                        print("숫자를 입력해주세용")
-            elif year%400 ==0:      #400으로 나누어떨어질 때
-                while True:
-                    try:
-                        day = int(input("Day : "))
-                        if day > 29:
-                            raise NotImplementedError
-                        break   
-                    except NotImplementedError:
-                        print("29일까지만 입력해주세용")
-                    except ValueError:
-                        print("숫자를 입력해주세용")
-    # 윤년 아닌 해
-    elif year%4!=0:
-        while True:
-            try:
-                day = int(input("Day : "))
-                if day > 28:
-                    raise NotImplementedError
-                break
-            except NotImplementedError:
-                print("28일까지만 입력해주세용")
-            except ValueError:
-                print("숫자를 입력해주세용") 
-
 # 날짜 리스트
 #윤년인지 확인
 if year%4 == 0:
@@ -163,22 +63,126 @@ elif year%4 != 0:           #윤년 아님
     Dec=[335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365]
 
 
-#오늘 날짜
-today_m = int(today.strftime("%m"))         #today_month
-today_d = int(today.strftime("%d"))         #today_date
 
-#숫자로 입력한 달을 문자로 바꿈 (e.g. 4 -> Apr)
-months = [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
-str_month_point = list(months[month-1])
-str_month_today = list(months[today_m-1])
+def get_date_diff(today_m: int, today_d: int):
+    # month 입력
+    while True:
+        try:
+            month = int(input("Month : "))
+            if month > 12: 
+                raise NotImplementedError
+            break
+        except NotImplementedError:
+            print("12월까지만 입력해주세용")
+        except ValueError:
+            print("숫자를 입력해주세용")
 
-for i in range(1,13):
-    if month == i:
-        point_day = str_month_point[day-1]
-    if today_m == i:
-        today = str_month_today[today_d-1]
-        
-date_diff = point_day-today      #date_difference
+    # day 입력
+    # 몇 월인지 확인
+    thir_o_d = [1, 3, 5, 7, 8, 10, 12]   # thirty_one_days
+    thir_d = [4, 6, 9, 11]      #thirty_days
+
+    # 31일까지 있는 달
+    for i in thir_o_d:
+        if month == i:
+            while True:
+                try:
+                    day = int(input("Day : "))
+                    if day > 31:
+                        raise NotImplementedError
+                    break
+                except NotImplementedError:
+                    print("31일까지만 입력해주세용")
+                except ValueError:
+                    print("숫자를 입력해주세용")
+            break
+
+    # 30일까지 있는 달
+    for i in thir_d:
+        if month == i:
+            while True:
+                try:
+                    day = int(input("Day : "))
+                    if day > 30:
+                        raise NotImplementedError
+                    break
+                except NotImplementedError:
+                    print("30일까지만 입력해주세용")
+                except ValueError:
+                    print("숫자를 입력해주세용")
+            break
+
+    # 2월
+    if month == 2:
+        # 윤년 계산
+        if year%4 == 0:     # 4년마다 한번
+            if year%100 != 0:   #100으로 안 나누어ㄸ러어짐
+                # 그냥 윤년일 때
+                while True:
+                    try:
+                        day = int(input("Day : "))
+                        if day > 29:
+                            raise NotImplementedError
+                        break
+                    except NotImplementedError:
+                        print("29일까지만 입력해주세용")
+                    except ValueError:
+                        print("숫자를 입력해주세용")
+            # 100으로 나누어떨어지지만 400으로 나누어떨어지지 않는 해
+            elif year%100==0:         #100으로 나누어떨어지지만
+                if year%400 !=0:    #400으로는 나누어떨어지지 않는 해
+                    while True:
+                        try:
+                            day = int(input("Day : "))
+                            if day > 28:
+                                raise NotImplementedError
+                            break
+                        except NotImplementedError:
+                            print("28일까지만 입력해주세용")
+                        except ValueError:
+                            print("숫자를 입력해주세용")
+                elif year%400 ==0:      #400으로 나누어떨어질 때
+                    while True:
+                        try:
+                            day = int(input("Day : "))
+                            if day > 29:
+                                raise NotImplementedError
+                            break   
+                        except NotImplementedError:
+                            print("29일까지만 입력해주세용")
+                        except ValueError:
+                            print("숫자를 입력해주세용")
+        # 윤년 아닌 해
+        elif year%4!=0:
+            while True:
+                try:
+                    day = int(input("Day : "))
+                    if day > 28:
+                        raise NotImplementedError
+                    break
+                except NotImplementedError:
+                    print("28일까지만 입력해주세용")
+                except ValueError:
+                    print("숫자를 입력해주세용") 
+
+    #입력받은 달과 날짜를 숫자로 바꿈
+    today_m = int(today_m)
+    today_d = int(today_d)
+    
+    #숫자로 입력한 달을 문자로 바꿈 (e.g. 4 -> Apr)
+    months = [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+    str_month_point = list(months[month-1])
+    str_month_today = list(months[today_m-1])
+
+    for i in range(1,13):
+        if month == i:
+            point_day = str_month_point[day-1]
+        if today_m == i:
+            today = str_month_today[today_d-1]
+            
+    date_diff = point_day-today      #date_difference
+    #리턴
+    return date_diff
 
 if __name__ == "__main__":
-    print(date_diff)
+    print(get_date_diff(today.strftime("%m"), today.strftime("%d")))
